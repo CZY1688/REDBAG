@@ -16,7 +16,7 @@ public:
 		GrabDuplicate = -1
 	};
 
-	RedPacket(double money = 0.0, int packetNum = 1, packet_text_string owner = TEXT("Unknown"));
+	RedPacket(double money = 0.0, int packetNum = 1, packet_text_string owner = _T("Unknown"));
 	~RedPacket();
 
 	void setMoney(double money, int packetNum);

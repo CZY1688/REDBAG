@@ -1,4 +1,4 @@
-#include "resource.h"   
+﻿#include "resource.h"   
 #include "BForm.h"     
 #include "RedPacket.h"     
 #include <string>
