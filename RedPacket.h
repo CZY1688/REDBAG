@@ -4,6 +4,10 @@
 #include <string>
 #include <tchar.h>
 
+#ifndef TEXT
+#define TEXT(x) _T(x)
+#endif
+
 using packet_text_string = std::basic_string<TCHAR>;
 
 class RedPacket
