@@ -59,7 +59,8 @@ string ToAcpString(const tstring& s)
 #ifdef UNICODE
     int len = WideCharToMultiByte(CP_ACP, 0, s.c_str(), -1, 0, 0, 0, 0);
     if (len <= 0) return string();
-    vector<char> buffer(static_cast<size_t>(len), 0);
+    const size_t bufferLen = static_cast<size_t>(len);
+    vector<char> buffer(bufferLen, 0);
     WideCharToMultiByte(CP_ACP, 0, s.c_str(), -1, &buffer[0], len, 0, 0);
     return string(&buffer[0]);
 #else
