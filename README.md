@@ -21,8 +21,8 @@
 程序中包含 `RedPacket` 类（`RedPacket.h/.cpp`）：
 
 - `setMoney(double, int)`：塞钱（已抢后拒绝修改）
-- `grab(std::string)`：二倍均值随机算法抢红包，精确到分
-- `grab(std::string, int*)`：支持返回状态（成功/抢完/重复抢）
+- `grab(tstring)`：二倍均值随机算法抢红包，精确到分
+- `grab(tstring, int*)`：支持返回状态（成功/抢完/重复抢）
 - `show()` / `summary()`：查看明细（发红包者、总份数、已抢份数、记录）
 - `bestLuckRecord()`：返回手气最佳记录（用户名:金额）
 

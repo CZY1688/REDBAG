@@ -1,7 +1,7 @@
 #ifndef REDPACKET_H
 #define REDPACKET_H
 
-#include <string>
+#include "BWindows.h"
 using namespace std;
 
 class RedPacket
@@ -14,21 +14,21 @@ public:
 		GrabDuplicate = -1
 	};
 
-	RedPacket(double money = 0.0, int packetNum = 1, string owner = "Unknown");
+	RedPacket(double money = 0.0, int packetNum = 1, tstring owner = TEXT("Unknown"));
 	~RedPacket();
 
 	void setMoney(double money, int packetNum);
-	double grab(string grabberName);
-	double grab(string grabberName, int* outStatus);
+	double grab(tstring grabberName);
+	double grab(tstring grabberName, int* outStatus);
 	void show() const;
 
-	string summary() const;
+	tstring summary() const;
 	// Return internal fixed array pointer; valid element count is grabbedCount().
-	const string* records() const;
+	const tstring* records() const;
 	bool canSetMoney() const;
 	int grabbedCount() const;
 	int totalCount() const;
-	string bestLuckRecord() const;
+	tstring bestLuckRecord() const;
 
 private:
 	// Copy is intentionally disabled because this class owns raw dynamic arrays.
@@ -38,13 +38,13 @@ private:
 	double total_money;
 	int num;
 	int grabbed;
-	string name;
-	string* arr;
-	string* grabbed_names;
+	tstring name;
+	tstring* arr;
+	tstring* grabbed_names;
 	int grabbed_name_count;
 
 	double Round2(double value) const;
-	bool HasGrabbed(const string& grabberName) const;
+	bool HasGrabbed(const tstring& grabberName) const;
 };
 
 #endif
