@@ -189,7 +189,7 @@ packet_text_string RedPacket::bestLuckRecord() const
 	packet_text_string bestName;
 	for (int i = 0; i < grabbed; ++i)
 	{
-		size_t pos = arr[i].find(_T(':'));
+		size_t pos = arr[i].find(TEXT(":"));
 		if (pos == packet_text_string::npos) continue;
 		packet_text_string who = arr[i].substr(0, pos);
 		packet_text_string moneyText = arr[i].substr(pos + 1);

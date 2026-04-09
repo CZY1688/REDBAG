@@ -5,7 +5,7 @@
 #include <tchar.h>
 using namespace std;
 
-typedef basic_string<TCHAR, char_traits<TCHAR>, allocator<TCHAR> > packet_text_string;
+using packet_text_string = basic_string<TCHAR, char_traits<TCHAR>, allocator<TCHAR> >;
 
 class RedPacket
 {
