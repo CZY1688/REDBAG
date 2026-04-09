@@ -15,7 +15,7 @@ using namespace std;
 namespace
 {
 constexpr LPCTSTR DEFAULT_GRABBER_NAME = TEXT("AnonymousUser");
-typedef basic_ostringstream<TCHAR, char_traits<TCHAR>, allocator<TCHAR> > text_ostringstream;
+using text_ostringstream = basic_ostringstream<TCHAR>;
 }
 
 double RedPacket::Round2(double value) const
@@ -193,7 +193,7 @@ packet_text_string RedPacket::bestLuckRecord() const
 		if (pos == packet_text_string::npos) continue;
 		packet_text_string who = arr[i].substr(0, pos);
 		packet_text_string moneyText = arr[i].substr(pos + 1);
-		TCHAR* pEnd = 0;
+		TCHAR* pEnd = nullptr;
 		errno = 0;
 		double money = _tcstod(moneyText.c_str(), &pEnd);
 		if (pEnd == moneyText.c_str() || errno == ERANGE) continue;
