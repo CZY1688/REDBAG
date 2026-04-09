@@ -1,0 +1,176 @@
+// Microsoft Visual C++ generated resource script.
+//
+#include "resource.h"
+
+#define APSTUDIO_READONLY_SYMBOLS
+/////////////////////////////////////////////////////////////////////////////
+//
+// Generated from the TEXTINCLUDE 2 resource.
+//
+#include "windows.h"
+
+/////////////////////////////////////////////////////////////////////////////
+#undef APSTUDIO_READONLY_SYMBOLS
+
+/////////////////////////////////////////////////////////////////////////////
+// 中文(简体，中国) resources
+
+#if !defined(AFX_RESOURCE_DLL) || defined(AFX_TARG_CHS)
+LANGUAGE LANG_CHINESE, SUBLANG_CHINESE_SIMPLIFIED
+#pragma code_page(936)
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Dialog
+//
+
+ID_form1 DIALOGEX 200, 100, 368, 241
+STYLE DS_SETFONT | DS_FIXEDSYS | WS_MINIMIZEBOX | WS_MAXIMIZEBOX | WS_POPUP | WS_CAPTION | WS_SYSMENU | WS_THICKFRAME
+CAPTION "Red Packet Simulator"
+FONT 9, "MS Shell Dlg", 0, 0, 0x0
+BEGIN
+    CONTROL         "",ID_picCover,"Static",SS_BITMAP | SS_NOTIFY | SS_CENTERIMAGE | WS_BORDER,8,8,136,82
+    EDITTEXT        ID_editLog,8,104,132,96,ES_MULTILINE | ES_AUTOVSCROLL | ES_READONLY | WS_VSCROLL
+    LTEXT           "Static",ID_txtLeftStatic,8,224,132,9
+    GROUPBOX        "Packet A (pre-funded)",ID_grpA,148,8,204,52
+    EDITTEXT        ID_editAName,156,23,78,14,ES_AUTOHSCROLL
+    PUSHBUTTON      "Grab",ID_btnAGrab,240,22,52,16
+    PUSHBUTTON      "View",ID_btnAShow,297,22,48,16
+    LTEXT           "Static",ID_txtSep,150,64,26,9
+    GROUPBOX        "Packet B (pre-funded)",ID_grpB,148,76,204,60
+    EDITTEXT        ID_editBName,156,91,78,14,ES_AUTOHSCROLL
+    PUSHBUTTON      "Grab",ID_btnBGrab,240,90,52,16
+    PUSHBUTTON      "View",ID_btnBShow,297,90,48,16
+    LTEXT           "Static",ID_txtResult,156,112,188,11
+    GROUPBOX        "Packet C (fund first)",ID_grpC,148,136,204,92
+    LTEXT           "Amount:",ID_txtCMoney,156,153,38,9,SS_CENTERIMAGE | SS_REALSIZECONTROL
+    EDITTEXT        ID_editCMoney,203,150,62,14,ES_AUTOHSCROLL
+    LTEXT           "Count:",ID_txtCNum,156,173,42,9
+    EDITTEXT        ID_editCNum,203,170,62,14,ES_AUTOHSCROLL
+    PUSHBUTTON      "Fund Packet",ID_btnCFill,276,150,69,16
+    PUSHBUTTON      "Robot Grab",ID_btnRobotGrab,12,204,69,14
+    EDITTEXT        ID_editCName,156,198,78,14,ES_AUTOHSCROLL
+    PUSHBUTTON      "Grab",ID_btnCGrab,240,197,52,16
+    PUSHBUTTON      "View",ID_btnCShow,297,197,48,16
+END
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// DESIGNINFO
+//
+
+#ifdef APSTUDIO_INVOKED
+GUIDELINES DESIGNINFO
+BEGIN
+    ID_form1, DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 361
+        TOPMARGIN, 7
+        BOTTOMMARGIN, 234
+    END
+END
+#endif    // APSTUDIO_INVOKED
+
+
+#ifdef APSTUDIO_INVOKED
+/////////////////////////////////////////////////////////////////////////////
+//
+// TEXTINCLUDE
+//
+
+1 TEXTINCLUDE 
+BEGIN
+    "resource.h\0"
+END
+
+2 TEXTINCLUDE 
+BEGIN
+    "#include ""windows.h""\r\n"
+    "\0"
+END
+
+3 TEXTINCLUDE 
+BEGIN
+    "\r\n"
+    "\0"
+END
+
+#endif    // APSTUDIO_INVOKED
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// RT_MANIFEST
+//
+
+1                       RT_MANIFEST             "XpStyles.exe.manifest"
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Icon
+//
+
+// Icon with lowest ID value placed first to ensure application icon
+// remains consistent on all systems.
+IDI_ICON1               ICON                    "main.ico"
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Bitmap
+//
+
+IDB_PACKET_COVER        BITMAP                  "C:\\Users\\czytj\\Desktop\\202604\\cover.bmp"
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// AFX_DIALOG_LAYOUT
+//
+
+ID_form1 AFX_DIALOG_LAYOUT
+BEGIN
+    0,
+    0, 0, 0, 0,
+    0, 0, 0, 0,
+    0, 0, 0, 0,
+    0, 0, 0, 0,
+    0, 0, 0, 0,
+    0, 0, 0, 0,
+    0, 0, 0, 0,
+    0, 0, 0, 0,
+    0, 0, 0, 0,
+    0, 0, 0, 0,
+    0, 0, 0, 0,
+    0, 0, 0, 0,
+    0, 0, 0, 0,
+    0, 0, 0, 0,
+    0, 0, 100, 100,
+    0, 0, 0, 0,
+    0, 0, 0, 0,
+    0, 0, 0, 0,
+    0, 0, 0, 0,
+    0, 0, 0, 0,
+    0, 0, 0, 0,
+    0, 0, 0, 0,
+    0, 0, 0, 0
+END
+
+#endif    // 中文(简体，中国) resources
+/////////////////////////////////////////////////////////////////////////////
+
+
+
+#ifndef APSTUDIO_INVOKED
+/////////////////////////////////////////////////////////////////////////////
+//
+// Generated from the TEXTINCLUDE 3 resource.
+//
+
+
+/////////////////////////////////////////////////////////////////////////////
+#endif    // not APSTUDIO_INVOKED
+
