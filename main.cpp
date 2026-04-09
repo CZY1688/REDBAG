@@ -2,7 +2,6 @@
 #include "BForm.h"     
 #include "RedPacket.h"     
 #include <string>
-#include <sstream>
 
 using namespace std;
 
@@ -30,7 +29,7 @@ static const TCHAR kResultDefault[] = TEXT("");
 static const TCHAR kTitleInfo[] = TEXT("��ʾ");
 static const TCHAR kTitleWarn[] = TEXT("����");
 static const TCHAR kAnonymousUser[] = TEXT("�����û�");
-static const char kRobotNamePrefix[] = "机器人";
+static const TCHAR kRobotNamePrefix[] = TEXT("机器人");
 static const TCHAR kPacketLabelA[] = TEXT("���A");
 static const TCHAR kPacketLabelB[] = TEXT("���B");
 static const TCHAR kPacketLabelC[] = TEXT("���C");
@@ -85,9 +84,9 @@ string ToString(const tstring& s)
 // �Զ����ɻ���������
 string NextRobotName()
 {
-    ostringstream oss;
-    oss << kRobotNamePrefix << robotIndex++;
-    return oss.str();
+    TCHAR robotName[64] = { 0 };
+    _stprintf(robotName, TEXT("%s%d"), kRobotNamePrefix, robotIndex++);
+    return ToString(robotName);
 }
 
 //��ͨ��Ϣ��ʾ
@@ -99,7 +98,7 @@ void ShowInfoBox(LPCTSTR msg)
 //����������ʾ
 void ShowWarnBox(LPCTSTR msg)
 {
-    MsgBox(msg, kTitleWarn, mb_OK, static_cast<EMsgBoxIcon>(MB_ICONWARNING));
+    MsgBox(msg, kTitleWarn, mb_OK, mb_IconExclamation);
 }
 
 //��ָ����������ж�ȡ�û�������ı�
