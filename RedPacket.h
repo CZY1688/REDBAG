@@ -3,9 +3,8 @@
 
 #include <string>
 #include <tchar.h>
-using namespace std;
 
-using packet_text_string = basic_string<TCHAR>;
+using packet_text_string = std::basic_string<TCHAR>;
 
 class RedPacket
 {
