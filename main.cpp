@@ -2,6 +2,7 @@
 #include "BForm.h"     
 #include "RedPacket.h"     
 #include <string>
+#include <vector>
 
 using namespace std;
 
@@ -15,23 +16,23 @@ enum ECurrentPacket
 };
 
 //�ı�ͳһ�������﷽���Ժ��޸�
-const LPCTSTR kWindowTitle = TEXT("ģ��΢�������");
-const LPCTSTR kGroupA = TEXT("���A��Ǯ�����ã�ֱ�ӿ�����");
-const LPCTSTR kGroupB = TEXT("���B��Ǯ�����ã�ֱ�ӿ�����");
-const LPCTSTR kGroupC = TEXT("���C������Ǯ����������");
-const LPCTSTR kGrab = TEXT("�����");
-const LPCTSTR kView = TEXT("�鿴");
-const LPCTSTR kRobotGrab = TEXT("�����������");
-const LPCTSTR kCMoney = TEXT("Ǯ��(Ԫ)��");
-const LPCTSTR kCNum = TEXT("�ּ��������");
-const LPCTSTR kCFill = TEXT("��Ǯ�����");
-const LPCTSTR kResultDefault = TEXT("");
-const LPCTSTR kTitleInfo = TEXT("��ʾ");
-const LPCTSTR kTitleWarn = TEXT("����");
-const LPCTSTR kAnonymousUser = TEXT("�����û�");
-const LPCTSTR kPacketLabelA = TEXT("���A");
-const LPCTSTR kPacketLabelB = TEXT("���B");
-const LPCTSTR kPacketLabelC = TEXT("���C");
+const TCHAR* const kWindowTitle = TEXT("ģ��΢�������");
+const TCHAR* const kGroupA = TEXT("���A��Ǯ�����ã�ֱ�ӿ�����");
+const TCHAR* const kGroupB = TEXT("���B��Ǯ�����ã�ֱ�ӿ�����");
+const TCHAR* const kGroupC = TEXT("���C������Ǯ����������");
+const TCHAR* const kGrab = TEXT("�����");
+const TCHAR* const kView = TEXT("�鿴");
+const TCHAR* const kRobotGrab = TEXT("�����������");
+const TCHAR* const kCMoney = TEXT("Ǯ��(Ԫ)��");
+const TCHAR* const kCNum = TEXT("�ּ��������");
+const TCHAR* const kCFill = TEXT("��Ǯ�����");
+const TCHAR* const kResultDefault = TEXT("");
+const TCHAR* const kTitleInfo = TEXT("��ʾ");
+const TCHAR* const kTitleWarn = TEXT("����");
+const TCHAR* const kAnonymousUser = TEXT("�����û�");
+const TCHAR* const kPacketLabelA = TEXT("���A");
+const TCHAR* const kPacketLabelB = TEXT("���B");
+const TCHAR* const kPacketLabelC = TEXT("���C");
 
 
 //ȫ�ֱ���
@@ -52,13 +53,15 @@ void DoGrabWithName(RedPacket& packet, const string& who, LPCTSTR packetLabel, b
 void DoGrab(RedPacket& packet, unsigned short idNameEdit, LPCTSTR packetLabel, bool checkReady, bool showResultText);
 
 
-// �����ַ����룺�����ַ� tstring תΪ ANSI string���ں����߼�ʹ��
-string ToAnsiString(const tstring& s)
+// �����ַ����룺�����ַ� tstring תΪ ACP string���ں����߼�ʹ��
+string ToAcpString(const tstring& s)
 {
 #ifdef UNICODE
-    char* ansi = StrConvFromUnicode(s.c_str(), false);
-    if (!ansi) return string();
-    return string(ansi);
+    int len = WideCharToMultiByte(CP_ACP, 0, s.c_str(), -1, 0, 0, 0, 0);
+    if (len <= 0) return string();
+    vector<char> buffer(static_cast<size_t>(len), 0);
+    WideCharToMultiByte(CP_ACP, 0, s.c_str(), -1, &buffer[0], len, 0, 0);
+    return string(&buffer[0]);
 #else
     return s;
 #endif
@@ -69,7 +72,7 @@ string NextRobotName()
 {
     TCHAR robotName[64] = { 0 };
     _stprintf(robotName, TEXT("������%d"), robotIndex++);
-    return ToAnsiString(robotName);
+    return ToAcpString(robotName);
 }
 
 //��ͨ��Ϣ��ʾ
@@ -94,8 +97,8 @@ tstring ReadText(unsigned short idEdit)
 string ReadNameOrDefault(unsigned short idEdit)
 {
     tstring s = ReadText(idEdit);
-    if (s.empty()) return ToAnsiString(kAnonymousUser);
-    return ToAnsiString(s);
+    if (s.empty()) return ToAcpString(kAnonymousUser);
+    return ToAcpString(s);
 }
 
 //�����ײ�ļ�¼�ַ������� "����:���" ��ֿ���
