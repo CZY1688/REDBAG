@@ -15,6 +15,7 @@ using namespace std;
 namespace
 {
 constexpr LPCTSTR DEFAULT_GRABBER_NAME = TEXT("AnonymousUser");
+typedef basic_ostringstream<TCHAR, char_traits<TCHAR>, allocator<TCHAR> > text_ostringstream;
 }
 
 double RedPacket::Round2(double value) const
@@ -23,13 +24,13 @@ double RedPacket::Round2(double value) const
 	return static_cast<double>(static_cast<int>(value * 100.0 - 0.5)) / 100.0;
 }
 
-RedPacket::RedPacket(double money, int packetNum, text_string owner)
+RedPacket::RedPacket(double money, int packetNum, packet_text_string owner)
 	: total_money(money), num(packetNum > 0 ? packetNum : 1), grabbed(0), name(owner), arr(0), grabbed_names(0), grabbed_name_count(0)
 {
 	if (name.empty()) name = TEXT("Unknown");
 	if (total_money < 0.0) total_money = 0.0;
-	arr = new text_string[num];
-	grabbed_names = new text_string[num];
+	arr = new packet_text_string[num];
+	grabbed_names = new packet_text_string[num];
 }
 
 RedPacket::~RedPacket()
@@ -53,9 +54,9 @@ void RedPacket::setMoney(double money, int packetNum)
 	total_money = Round2(money);
 	num = packetNum;
 	delete[] arr;
-	arr = new text_string[num];
+	arr = new packet_text_string[num];
 	delete[] grabbed_names;
-	grabbed_names = new text_string[num];
+	grabbed_names = new packet_text_string[num];
 	for (int i = 0; i < num; ++i)
 	{
 		arr[i].clear();
@@ -64,12 +65,12 @@ void RedPacket::setMoney(double money, int packetNum)
 	grabbed_name_count = 0;
 }
 
-double RedPacket::grab(text_string grabberName)
+double RedPacket::grab(packet_text_string grabberName)
 {
 	return grab(grabberName, 0);
 }
 
-bool RedPacket::HasGrabbed(const text_string& grabberName) const
+bool RedPacket::HasGrabbed(const packet_text_string& grabberName) const
 {
 	for (int i = 0; i < grabbed_name_count; ++i)
 	{
@@ -78,7 +79,7 @@ bool RedPacket::HasGrabbed(const text_string& grabberName) const
 	return false;
 }
 
-double RedPacket::grab(text_string grabberName, int* outStatus)
+double RedPacket::grab(packet_text_string grabberName, int* outStatus)
 {
 	if (grabberName.empty()) grabberName = DEFAULT_GRABBER_NAME;
 	if (HasGrabbed(grabberName))
@@ -129,7 +130,7 @@ double RedPacket::grab(text_string grabberName, int* outStatus)
 	total_money = Round2(total_money - got);
 	if (total_money < 0.0) total_money = 0.0;
 
-	basic_ostringstream<TCHAR, char_traits<TCHAR>, allocator<TCHAR> > oss;
+	text_ostringstream oss;
 	oss << fixed << setprecision(2) << got;
 	arr[grabbed] = grabberName + TEXT(":") + oss.str();
 	assert(grabbed_name_count >= 0 && grabbed_name_count < num);
@@ -142,13 +143,13 @@ double RedPacket::grab(text_string grabberName, int* outStatus)
 
 void RedPacket::show() const
 {
-	text_string s = summary();
+	packet_text_string s = summary();
 	OutputDebugString(s.c_str());
 }
 
-RedPacket::text_string RedPacket::summary() const
+packet_text_string RedPacket::summary() const
 {
-	basic_ostringstream<TCHAR, char_traits<TCHAR>, allocator<TCHAR> > oss;
+	text_ostringstream oss;
 	oss << TEXT("Owner: ") << name << TEXT("\n");
 	oss << TEXT("Money left: ") << fixed << setprecision(2) << total_money << TEXT(" yuan\n");
 	oss << TEXT("Total packets: ") << num << TEXT("\n");
@@ -157,12 +158,12 @@ RedPacket::text_string RedPacket::summary() const
 	{
 		oss << TEXT("  ") << i + 1 << TEXT(". ") << arr[i] << TEXT(" yuan\n");
 	}
-	text_string best = bestLuckRecord();
+	packet_text_string best = bestLuckRecord();
 	if (!best.empty()) oss << TEXT("Best luck: ") << best << TEXT(" yuan\n");
 	return oss.str();
 }
 
-const RedPacket::text_string* RedPacket::records() const
+const packet_text_string* RedPacket::records() const
 {
 	return arr;
 }
@@ -182,16 +183,16 @@ int RedPacket::totalCount() const
 	return num;
 }
 
-RedPacket::text_string RedPacket::bestLuckRecord() const
+packet_text_string RedPacket::bestLuckRecord() const
 {
 	double bestMoney = -1.0;
-	text_string bestName;
+	packet_text_string bestName;
 	for (int i = 0; i < grabbed; ++i)
 	{
-		size_t pos = arr[i].find(TEXT(':'));
-		if (pos == text_string::npos) continue;
-		text_string who = arr[i].substr(0, pos);
-		text_string moneyText = arr[i].substr(pos + 1);
+		size_t pos = arr[i].find(_T(':'));
+		if (pos == packet_text_string::npos) continue;
+		packet_text_string who = arr[i].substr(0, pos);
+		packet_text_string moneyText = arr[i].substr(pos + 1);
 		TCHAR* pEnd = 0;
 		errno = 0;
 		double money = _tcstod(moneyText.c_str(), &pEnd);
@@ -202,8 +203,8 @@ RedPacket::text_string RedPacket::bestLuckRecord() const
 			bestName = who;
 		}
 	}
-	if (bestMoney < 0.0 || bestName.empty()) return text_string();
-	basic_ostringstream<TCHAR, char_traits<TCHAR>, allocator<TCHAR> > oss;
+	if (bestMoney < 0.0 || bestName.empty()) return packet_text_string();
+	text_ostringstream oss;
 	oss << bestName << TEXT(":") << fixed << setprecision(2) << bestMoney;
 	return oss.str();
 }
