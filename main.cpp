@@ -30,6 +30,7 @@ static const TCHAR kResultDefault[] = TEXT("");
 static const TCHAR kTitleInfo[] = TEXT("��ʾ");
 static const TCHAR kTitleWarn[] = TEXT("����");
 static const TCHAR kAnonymousUser[] = TEXT("�����û�");
+static const char kRobotNamePrefix[] = "机器人";
 static const TCHAR kPacketLabelA[] = TEXT("���A");
 static const TCHAR kPacketLabelB[] = TEXT("���B");
 static const TCHAR kPacketLabelC[] = TEXT("���C");
@@ -85,7 +86,7 @@ string ToString(const tstring& s)
 string NextRobotName()
 {
     ostringstream oss;
-    oss << "机器人" << robotIndex++;
+    oss << kRobotNamePrefix << robotIndex++;
     return oss.str();
 }
 
@@ -98,7 +99,7 @@ void ShowInfoBox(LPCTSTR msg)
 //����������ʾ
 void ShowWarnBox(LPCTSTR msg)
 {
-    MsgBox(msg, kTitleWarn, mb_OK, mb_IconExclamation);
+    MsgBox(msg, kTitleWarn, mb_OK, static_cast<EMsgBoxIcon>(MB_ICONWARNING));
 }
 
 //��ָ����������ж�ȡ�û�������ı�
