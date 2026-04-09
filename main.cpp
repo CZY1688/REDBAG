@@ -85,7 +85,7 @@ string ToString(const tstring& s)
 string NextRobotName()
 {
     ostringstream oss;
-    oss << "robot" << robotIndex++;
+    oss << "机器人" << robotIndex++;
     return oss.str();
 }
 
